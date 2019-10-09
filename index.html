@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+
+    <title>TWA</title>
+
+    <link rel="stylesheet" href="css/reset.css" />
+    <link rel="stylesheet" href="css/reveal.css" />
+    <link rel="stylesheet" href="css/theme/moon.css" />
+    <link rel="stylesheet" href="lib/css/zenburn.css" />
+
+    <!-- Printing and PDF exports -->
+    <script>
+      var link = document.createElement("link");
+      link.rel = "stylesheet";
+      link.type = "text/css";
+      link.href = window.location.search.match(/print-pdf/gi) ? "css/print/pdf.css" : "css/print/paper.css";
+      document.getElementsByTagName("head")[0].appendChild(link);
+    </script>
+  </head>
+  <body>
+    <div class="reveal">
+      <div class="slides">
+        <section>
+          <h1>TWA</h1>
+        </section>
+        <section>
+          <h2>Thou shall use the playstore</h2>
+        </section>
+        <section>
+          <h2>Thou want to use web technology?</h2>
+        </section>
+        <section>
+          <h2>Thou must wrap your app!</h2>
+        </section>
+        <section>
+          <h1>... But what if</h1>
+        </section>
+        <section data-background="#000" data-background-transition="zoom">
+          <section>
+            <h2>1. Prove your identity</h2>
+            <p>by becoming an app developer</p>
+          </section>
+          <section>
+            <h2>Create and store keypair to sign packages</h2>
+            <pre>
+    <code class="hljs sh" data-trim data-line-numbers="8">$ keytool -list -v -keystore ./mykeystore.ks -alias test -storepass password -keypass password
+
+Alias name: key0
+Creation date: 28 Jan 2019
+...
+Certificate fingerprints:
+    SHA1: 38:03:••:••:•• ...
+    SHA256: FB:B4:••:••:•• ...
+Signature algorithm name: SHA256withRSA
+Subject Public Key Algorithm: 2048-bit RSA key
+Version: 3
+    </code>
+</pre>
+          </section>
+        </section>
+        <section data-background="#111">
+          <h2>2. Create your (awesome) PWA</h2>
+          <p>service-worker and manifest are mandatory</p>
+        </section>
+        <section data-background="#222">
+          <section>
+            <h2>3. Link your identity</h2>
+            <p>Add fingerprint to .well_known folder</p>
+          </section>
+          <section>
+            <pre>
+                <code class="hljs json" data-trim>[
+    {
+        "relation": ["delegate_permission/common.handle_all_urls"],
+        "target": {
+            "namespace": "android_app",
+            "package_name": "org.arielext.hostedmusicdb",
+            "sha256_cert_fingerprints": [
+                "FB:B4:••:••:••"
+            ]
+        }
+    }
+]</code></pre>
+          </section>
+        </section>
+        <section data-background="#333">
+            <section>
+                <h2>4. Create empty app with a TWA</h2>
+                <p>Use URL of PWA as starting point</p>
+            </section>
+            <section>
+<pre><code class="hljs xml" data-trim data-line-numbers="4,6,7"><manifest>
+    <application>
+        <activity>
+            <meta-data
+                android:name="android.support.customtabs.trusted.DEFAULT_URL"
+                android:value="https://my-awesome-pwa.example.com" />
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+    </application>
+</manifest></code></pre>
+            </section>
+        </section>
+        <section data-background="#444">
+            <h2>5. Sign the app</h2>
+            <p>App and PWA are now proven to be from the same publisher</p>
+        </section>
+        <section data-background="#555">
+                <h2>Profit</h2>
+                <p>As long as your customer has Chrome installed</p>
+            </section>
+        <section>
+          <h2>Would you use it?</h2>
+        </section>
+        <section>
+            <section>
+                <h1>One more thing</h1>
+            </section>
+            <section>
+                <img src="img/frontendlove-eindhoven.png" alt="frontendlove Eindhoven">
+            </section>
+            <section>
+                <h2>6 speakers</h2>
+                <h3>In the afternoon</h3>
+                <h3>At the High Tech campus</h3>
+            </section>
+            <section>
+                    <h2>Follow us for more information</h2>
+                    <p>
+                        <small class="social">
+                        <a href="https://twitter.com/isaaceindhoven" target="_blank">
+                            <img src="img/twitter.svg" width="25" />
+                            <span class="social-text">Twitter</span></a
+                        >
+                        <br />
+                        <a href="https://www.linkedin.com/company/isaac/" target="_blank">
+                            <img src="img/linkedin.svg" width="25" />
+                            <span class="social-text">Linkedin</span></a
+                        >
+                        </small>
+                    </p>
+                </section>
+            <section>
+                <img src="img/qr.webp" alt="https://eventbrite.co.uk/e/frontend-love-eindhoven-tickets-75129910585">
+            </section>
+        </section>
+      </div>
+    </div>
+
+    <script src="js/reveal.js"></script>
+
+    <script>
+      Reveal.initialize({
+        controls: false,
+        progress: false,
+        history: true,
+        dependencies: [{ src: "plugin/notes/notes.js", async: true }, { src: "plugin/highlight/highlight.js", async: true }],
+      });
+    </script>
+  </body>
+</html>
